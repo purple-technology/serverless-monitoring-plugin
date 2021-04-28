@@ -4,6 +4,29 @@ module.exports = class ServerlessMonitoringPlugin {
 	constructor(serverless) {
 		this.serverless = serverless
 
+		const { configSchemaHandler } = this.serverless
+
+		configSchemaHandler.defineCustomProperties.bind(configSchemaHandler)({
+			type: 'object',
+			properties: {
+				monitoring: {
+					type: 'object',
+					properties: {
+						stages: {
+							type: 'array',
+							items: {
+								type: 'string'
+							}
+						}
+					},
+					required: ['stages'],
+					additionalProperties: false
+				}
+			},
+			required: ['monitoring'],
+			additionalProperties: false
+		})
+
 		this.hooks = {
 			'after:aws:package:finalize:mergeCustomProviderResources': this.process.bind(
 				this
@@ -27,7 +50,7 @@ module.exports = class ServerlessMonitoringPlugin {
 			'AWS::Logs::MetricFilter': this.logMetricsReducer.bind(this)
 		}
 
-		const stages = ['master', 'staging', 'beta', 'develop20']
+		const { stages } = this.serverless.service.custom.monitoring
 
 		// Prepares ordered template according to order of "reducers"
 		// so that the widgets are in the dashboard then sorted accordingly
