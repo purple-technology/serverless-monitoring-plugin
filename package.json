@@ -11,8 +11,8 @@
 	"scripts": {
 		"test:lint": "eslint ./src/**/*.js",
 		"test:lint:fix": "npm run test:lint -- --fix",
-		"version": "",
-		"postversion": "git push && git push --tags && npm publish --access public",
+		"release:changelog": "standard-version",
+		"release:publish": "git push --follow-tags && npm publish --access public",
 		"prepare": "husky install"
 	},
 	"homepage": "https://github.com/purple-technology/serverless-monitoring-plugin#readme",
@@ -23,14 +23,16 @@
 	"bugs": {
 		"url": "https://github.com/purple-technology/serverless-monitoring-plugin/issues"
 	},
-	"dependencies": {},
 	"devDependencies": {
+		"@commitlint/cli": "^12.1.4",
+		"@commitlint/config-conventional": "^12.1.4",
 		"eslint": "^7.25.0",
 		"eslint-config-prettier": "^8.3.0",
 		"eslint-plugin-prettier": "^3.4.0",
 		"husky": "^6.0.0",
 		"lint-staged": "^11.0.0",
-		"prettier": "^2.2.1"
+		"prettier": "^2.2.1",
+		"standard-version": "^9.3.1"
 	},
 	"lint-staged": {
 		"src/**/*.js": [
