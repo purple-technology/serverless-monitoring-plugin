@@ -24,7 +24,7 @@
 		"url": "https://github.com/purple-technology/serverless-monitoring-plugin/issues"
 	},
 	"devDependencies": {
-		"@commitlint/cli": "^12.1.4",
+		"@commitlint/cli": "^14.1.0",
 		"@commitlint/config-conventional": "^12.1.4",
 		"eslint": "^7.25.0",
 		"eslint-config-prettier": "^8.3.0",
